@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Putar Video — urstreamm</title>
+
+  <link rel='icon' type='image/png' href='https://i.postimg.cc/SRRPq0z5/b4ff6c9108697381d9c30467292491ec-removebg-preview.png'/>
+  <link rel='shortcut icon' href='https://i.postimg.cc/SRRPq0z5/b4ff6c9108697381d9c30467292491ec-removebg-preview.png'/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --bg-primary:#0D1117;--bg-secondary:#161B22;--bg-card:#1C2128;--bg-hover:#21262D;
+      --accent-blue:#4A9EFF;--text-primary:#E6EDF3;--text-secondary:#8B949E;
+      --text-muted:#484F58;--border-color:#30363D;
+      --gradient-1:linear-gradient(135deg,#4A9EFF 0%,#7B5EA7 100%);
+      --radius-md:12px;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    body{font-family:'Inter',sans-serif;background-color:var(--bg-primary);color:var(--text-primary);min-height:100vh;line-height:1.6;}
+    ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg-secondary);}::-webkit-scrollbar-thumb{background:var(--accent-blue);border-radius:3px;}
+
+    /* ── HEADER ── */
+    .sv-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,17,23,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-color);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+    .sv-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .sv-logo-icon{width:36px;height:36px;background:var(--gradient-1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;}
+    .sv-logo-text{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:2px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .sv-back-btn{display:flex;align-items:center;gap:8px;color:var(--text-secondary);text-decoration:none;font-size:13px;font-weight:500;padding:8px 14px;border:1px solid var(--border-color);border-radius:8px;transition:var(--transition);}
+    .sv-back-btn:hover{color:var(--accent-blue);border-color:var(--accent-blue);}
+
+    /* ── MAIN LAYOUT ── */
+    .sv-player-page{margin-top:64px;padding:32px 24px 60px;max-width:1200px;margin-left:auto;margin-right:auto;}
+    .sv-player-page{margin-top:80px;}
+
+    /* ── BREADCRUMB ── */
+    .sv-breadcrumb{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);margin-bottom:20px;font-family:'JetBrains Mono',monospace;}
+    .sv-breadcrumb a{color:var(--accent-blue);text-decoration:none;}
+    .sv-breadcrumb a:hover{text-decoration:underline;}
+
+    /* ── VIDEO PLAYER ── */
+    .sv-player-wrap{width:100%;background:#000;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border-color);box-shadow:0 16px 64px rgba(0,0,0,0.6);}
+    .sv-player-wrap video, .sv-player-wrap iframe{width:100%;display:block;max-height:70vh;background:#000;border:none;}
+
+    /* placeholder saat src belum diisi */
+    .sv-player-placeholder{width:100%;aspect-ratio:16/9;background:var(--bg-secondary);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--text-muted);}
+    .sv-player-placeholder i{font-size:48px;color:var(--border-color);}
+    .sv-player-placeholder p{font-size:13px;}
+
+    /* ── VIDEO INFO ── */
+    .sv-video-info{margin-top:24px;}
+    .sv-video-number{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent-blue);letter-spacing:1px;margin-bottom:8px;}
+    .sv-video-title{font-family:'Bebas Neue',cursive;font-size:clamp(22px,4vw,36px);letter-spacing:1px;margin-bottom:12px;line-height:1.15;}
+    .sv-video-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid var(--border-color);}
+    .sv-meta-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-muted);}
+    .sv-card-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:5px;letter-spacing:0.5px;}
+    .sv-tag-doc{background:rgba(74,158,255,0.15);color:var(--accent-blue);}
+    .sv-tag-nature{background:rgba(34,197,94,0.15);color:#22c55e;}
+    .sv-tag-space{background:rgba(168,85,247,0.15);color:#a855f7;}
+    .sv-tag-history{background:rgba(251,191,36,0.15);color:#fbbf24;}
+    .sv-tag-science{background:rgba(236,72,153,0.15);color:#ec4899;}
+    .sv-tag-tech{background:rgba(20,184,166,0.15);color:#14b8a6;}
+    .sv-tag-art{background:rgba(249,115,22,0.15);color:#f97316;}
+    .sv-tag-culture{background:rgba(239,68,68,0.15);color:#ef4444;}
+
+    /* ── NEXT / PREV ── */
+    .sv-nav-videos{margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .sv-nav-card{display:flex;align-items:center;gap:14px;padding:14px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-md);text-decoration:none;color:var(--text-primary);transition:var(--transition);}
+    .sv-nav-card:hover{border-color:var(--accent-blue);box-shadow:0 4px 20px rgba(74,158,255,0.2);}
+    .sv-nav-card.disabled{opacity:0.3;pointer-events:none;}
+    .sv-nav-thumb{width:80px;height:48px;object-fit:cover;border-radius:6px;background:var(--bg-secondary);flex-shrink:0;}
+    .sv-nav-text{min-width:0;}
+    .sv-nav-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-family:'JetBrains Mono',monospace;}
+    .sv-nav-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .sv-nav-arrow{font-size:18px;color:var(--accent-blue);flex-shrink:0;}
+
+    /* ── PLAYLIST SIDEBAR ── */
+    .sv-playlist-section{margin-top:40px;}
+    .sv-playlist-title{font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:2px;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+    .sv-playlist-title .line{width:4px;height:22px;background:var(--gradient-1);border-radius:2px;}
+    .sv-playlist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+    .sv-pl-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;overflow:hidden;cursor:pointer;text-decoration:none;color:var(--text-primary);transition:var(--transition);display:block;}
+    .sv-pl-card:hover{border-color:var(--accent-blue);transform:translateY(-3px);box-shadow:0 6px 28px rgba(74,158,255,0.2);}
+    .sv-pl-card.active{border-color:var(--accent-blue);box-shadow:0 0 0 2px rgba(74,158,255,0.35);}
+    .sv-pl-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--bg-secondary);}
+    .sv-pl-thumb img{width:100%;height:100%;object-fit:cover;}
+    .sv-pl-dur{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,0.85);font-size:10px;font-family:'JetBrains Mono',monospace;padding:2px 6px;border-radius:4px;color:#fff;font-weight:600;}
+    .sv-pl-now{position:absolute;inset:0;background:rgba(74,158,255,0.25);display:flex;align-items:center;justify-content:center;}
+    .sv-pl-now i{font-size:22px;color:#fff;}
+    .sv-pl-info{padding:10px 12px 12px;}
+    .sv-pl-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent-blue);margin-bottom:4px;}
+    .sv-pl-name{font-size:12px;font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+    /* ── NOT FOUND ── */
+    .sv-not-found{text-align:center;padding:80px 24px;}
+    .sv-not-found i{font-size:56px;color:var(--border-color);margin-bottom:20px;}
+    .sv-not-found h2{font-family:'Bebas Neue',cursive;font-size:32px;margin-bottom:12px;}
+    .sv-not-found p{color:var(--text-muted);margin-bottom:24px;}
+    .sv-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gradient-1);color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:600;transition:var(--transition);}
+    .sv-btn:hover{opacity:0.85;transform:translateY(-1px);}
+
+    @media(max-width:640px){
+      .sv-nav-videos{grid-template-columns:1fr;}
+      .sv-player-page{padding:16px 14px 40px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="sv-header">
+    <a class="sv-logo" href="index.html">
+       <img src='https://i.postimg.cc/SRRPq0z5/b4ff6c9108697381d9c30467292491ec-removebg-preview.png' alt='Logo' style='height:80px; width:auto;'/>
+      <span class="sv-logo-text">urstreamm</span>
+    </a>
+    <a class="sv-back-btn" href="index.html">
+      <i class="fas fa-arrow-left"></i> Kembali ke Playlist
+    </a>
+  </header>
+
+  <!-- KONTEN UTAMA (dirender via JS) -->
+  <main class="sv-player-page" id="sv-main"></main>
+
+  <script>
+    // ===== DATA VIDEO — samakan dengan index.html =====
+    // ===== DATA VIDEO — 40 VIDEO (samakan dengan index.html) =====
+    const videos = [
+      {id:1,  title:"Esdeh",src:"https://cdn.slicedrive.com/YNsLtbzp1.mp4",poster:"logo1.png",duration:"09:40",views:"2.4K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:2,  title:"Omeq Solo",src:"https://cdn.slicedrive.com/jah8nSrY1.mp4",poster:"logo2.png",duration:"09:11",views:"1.8K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:3,  title:"After LDR",src:"https://cdn.slicedrive.com/s9cS88il1.mp4",poster:"logo3.png",duration:"07:09",views:"3.1K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:4,  title:"Pulang Sekolah",src:"https://cdn.slicedrive.com/fwjlb6PI1.mp4",poster:"logo4.png",duration:"06:56",views:"1.5K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:5,  title:"StayCation",src:"https://cdn.slicedrive.com/9APmXFuy1.mp4",poster:"logo5.png",duration:"05:52",views:"2.9K",tag:"Tech",      tagClass:"sv-tag-tech"},
+      {id:6,  title:"Pulang Kondangan",src:"https://cdn.slicedrive.com/I1LAUxvy1.mp4",poster:"logo6.png",duration:"06:12",views:"1.2K",tag:"Mainstream",tagClass:"sv-tag-culture"},
+      {id:7,  title:"Lagi Ange",src:"https://cdn.slicedrive.com/GLadnnGJ1.mp4",poster:"logo7.png",duration:"03:38",views:"4.0K",tag:"Mainstream",tagClass:"sv-tag-science"},
+      {id:8,  title:"Ange Banget",src:"https://cdn.slicedrive.com/e5QN4hGP1.mp4",poster:"logo8.png",duration:"07:50",views:"900", tag:"Mainstream",tagClass:"sv-tag-doc"},
+      {id:9,  title:"Pink Bangett",src:"https://cdn.slicedrive.com/3DhTnLGn1.mp4",poster:"logo9.png",duration:"02:25",views:"1.1K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:10, title:"BlowJOB",src:"https://cdn.slicedrive.com/GCmm1PSp1.mp4",poster:"logo10.png",duration:"06:22",views:"2.2K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:11, title:"Abis Kerja Kelompok",src:"https://sendvid.com/in6jj4ji",poster:"logo11.png",duration:"10:34",views:"3.5K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:12, title:"Binal BGT ",src:"https://cdn.slicedrive.com/1Q0STnuX1.mp4",poster:"logo12.png",duration:"02:14",views:"1.9K",tag:"Tech",      tagClass:"sv-tag-tech"},
+      {id:13, title:"Adik adalah maut",src:"https://cdn.slicedrive.com/NdVWKAWP1.mp4",poster:"logo13.png",duration:"07:53",views:"2.7K",tag:"Mainstream",tagClass:"sv-tag-culture"},
+      {id:14, title:"Jatah cewek",src:"https://cdn.slicedrive.com/1KvLXlMO1.mp4",poster:"logo14.png",duration:"09:58",views:"1.4K",tag:"Mainstream",tagClass:"sv-tag-science"},
+      {id:15, title:"Masih Sempitt",src:"https://cdn.slicedrive.com/9NpmmxVr1.mp4",poster:"logo15.png",duration:"01:27",views:"3.8K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:16, title:"Kondangan",src:"https://cdn.slicedrive.com/1Q0STnuX1.mp4",poster:"logo16.png",duration:"04:15",views:"800", tag:"Mainstream",tagClass:"sv-tag-doc"},
+      {id:17, title:"Tocil",src:"https://cdn.slicedrive.com/vzl4dS1q1.mp4",poster:"logo17.png",duration:"06:01",views:"2.0K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:18, title:"Mentok Bgt",src:"https://cdn.slicedrive.com/vRU3S6th1.mp4",poster:"logo18.png",duration:"05:09",views:"1.6K",tag:"Tech",      tagClass:"sv-tag-tech"},
+      {id:19, title:"Ceweknya KeEnakan",src:"https://cdn.slicedrive.com/xQ0Ru2yB1.mp4",poster:"logo19.png",duration:"09:92",views:"4.2K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:20, title:"sepong Pacar",src:"https://cdn.slicedrive.com/7XwAGwKd1.mp4",poster:"logo20.png",duration:"07:18",views:"2.3K",tag:"Mainstream",tagClass:"sv-tag-culture"},
+      {id:21, title:"HYper bgt Ceweknya",src:"https://cdn.slicedrive.com/ppUBApc61.mp4",poster:"logo21.png",duration:"01:33",views:"1.0K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:22, title:"Tocil Omeq",src:"https://cdn.slicedrive.com/umhIR3VQ1.mp4",poster:"logo22.png",duration:"01:32",views:"3.3K",tag:"Mainstream",tagClass:"sv-tag-science"},
+      {id:23, title:"Sama Mantan",src:"https://cdn.slicedrive.com/ddw39znd1.mp4",poster:"logo23.png",duration:"01:00",views:"2.8K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:24, title:"Random",src:"https://cdn.aceimg.com/Ds97fsZIV.mp4",poster:"logo24.png",duration:"06:33",views:"1.7K",tag:"Mainstream",tagClass:"sv-tag-doc"},
+      {id:25, title:"Mirror Mantap",src:"https://cdn.aceimg.com/Hw85P58KS.mp4",poster:"logo25.png",duration:"05:03",views:"2.1K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:26, title:"Tobrut Check in",src:"https://cdn.aceimg.com/F7NfG1UN8.mp4",poster:"logo26.png",duration:"06:12",views:"1.3K",tag:"Tech",      tagClass:"sv-tag-tech"},
+      {id:27, title:"Ngewe di Kost",src:"https://cdn.aceimg.com/mNMnzy5RK.mp4",poster:"logo27.png",duration:"02:55",views:"3.0K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:28, title:"Tobrut binal banget",src:"https://cdn.aceimg.com/LenQt6YYs.mp4",poster:"logo28.png",duration:"04:31",views:"2.5K",tag:"Mainstream",tagClass:"sv-tag-culture"},
+      {id:29, title:"Jilbab Omeq",src:"https://cdn.aceimg.com/M3fnjmYOx.mp4",poster:"logo29.png",duration:"02:00",views:"4.5K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:30, title:"Ketahuan Omeq",src:"https://cdn.aceimg.com/IA9h0ozP8.mp4",poster:"logo30.png",duration:"06:59",views:"700", tag:"Mainstream",tagClass:"sv-tag-science"},
+      {id:31, title:"Pulang Sekolah check in",src:"https://cdn.aceimg.com/aXKTl282S.mp4",poster:"logo31.png",duration:"06:33",views:"2.6K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:32, title:"Cantik bgt ni cewek",src:"https://cdn.aceimg.com/YbeGH3BaU.mp4",poster:"logo32.png",duration:"01:00",views:"1.5K",tag:"Mainstream",tagClass:"sv-tag-doc"},
+      {id:33, title:"Doggy cum di dalem",src:"https://cdn.aceimg.com/znvphiMy2.mp4",poster:"logo33.png",duration:"01:54",views:"2.9K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:34, title:"Tobrut Hyper",src:"https://cdn.aceimg.com/Lnb2GxdOp.mp4",poster:"logo34.png",duration:"05:58",views:"1.8K",tag:"Tech",      tagClass:"sv-tag-tech"},
+      {id:35, title:"Layanin Pacar",src:"https://cdn.aceimg.com/Tg7m6Q1Tb.mp4",poster:"logo35.png",duration:"05:42",views:"3.7K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:36, title:"CrotDalem",src:"https://cdn.aceimg.com/bbIMHh2L9.mp4",poster:"logo36.png",duration:"09:29",views:"1.1K",tag:"Mainstream",tagClass:"sv-tag-culture"},
+      {id:37, title:"Daddy Ash",src:"https://cdn.aceimg.com/e3zqRBB9c.mp4",poster:"logo37.png",duration:"09:31",views:"4.1K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:38, title:"Becek",src:"https://cdn.aceimg.com/c8eWxKmm0.mp4",poster:"logo38.png",duration:"07:56",views:"2.4K",tag:"Mainstream",tagClass:"sv-tag-science"},
+      {id:39, title:"Adik Tiri",src:"https://cdn.aceimg.com/SnojqytuK.mp4",poster:"logo39.png",duration:"08:50",views:"3.2K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:40, title:"Mentok Bangett",src:"https://cdn.aceimg.com/6xt5bzVua.mp4",poster:"logo40.png",duration:"02:45",views:"950", tag:"Mainstream",tagClass:"sv-tag-doc"},
+    ];
+
+    // ===== AMBIL ID DARI URL =====
+    const params   = new URLSearchParams(window.location.search);
+    const videoId  = parseInt(params.get('id'));
+    const video    = videos.find(v => v.id === videoId);
+    const main     = document.getElementById('sv-main');
+
+    if (!video) {
+      // Video tidak ditemukan
+      main.innerHTML = `
+        <div class="sv-not-found">
+          <i class="fas fa-video-slash"></i>
+          <h2>Video Tidak Ditemukan</h2>
+          <p>Video dengan ID tersebut tidak ada dalam playlist.</p>
+          <a class="sv-btn" href="index.html"><i class="fas fa-home"></i> Kembali ke Beranda</a>
+        </div>`;
+    } else {
+      // Update title tab browser
+      document.title = (video.title !== '#' ? video.title : 'Video #' + video.id) + ' — urstreamm';
+
+      const idx  = videos.indexOf(video);
+      const prev = videos[idx - 1] || null;
+      const next = videos[idx + 1] || null;
+
+      // ===== DETEKSI OTOMATIS PLATFORM VIDEO =====
+      // Mendukung: Streamtape, SliceDrive, Mixdrop, DoodStream, Vimeo, dan direct .mp4
+      function detectPlayer(src) {
+        if (!src || src === '#') return { type: 'empty' };
+
+        // Streamtape — format: streamtape.com/v/ID/... atau /e/ID/
+        let m = src.match(/streamtape\.com\/[ve]\/([a-zA-Z0-9]+)/);
+        if (m) return { type: 'iframe', url: `https://streamtape.com/e/${m[1]}/` };
+
+        // SliceDrive — format: slicedrive.com/upload?v=ID atau slicedrive.com/embed/ID
+        m = src.match(/slicedrive\.com\/(?:upload\?v=|embed\/|video\/)([a-zA-Z0-9]+)/);
+        if (m) return { type: 'iframe', url: `https://slicedrive.com/embed/${m[1]}` };
+
+        // Mixdrop — format: mixdrop.co/f/ID atau /e/ID
+        m = src.match(/mixdrop\.[a-z]+\/[fe]\/([a-zA-Z0-9]+)/);
+        if (m) return { type: 'iframe', url: `https://mixdrop.co/e/${m[1]}` };
+
+        // DoodStream — format: doodstream.com/d/ID atau /e/ID
+        m = src.match(/dood(?:stream)?\.[a-z]+\/[de]\/([a-zA-Z0-9]+)/);
+        if (m) return { type: 'iframe', url: `https://doodstream.com/e/${m[1]}` };
+
+        // SendVid — format: sendvid.com/ID atau sendvid.com/embed/ID
+        m = src.match(/sendvid\.com\/(?:embed\/)?([a-zA-Z0-9]+)/);
+        if (m) return { type: 'iframe', url: `https://sendvid.com/embed/${m[1]}` };
+
+        // Vimeo — format: vimeo.com/ID atau player.vimeo.com/video/ID
+        m = src.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+        if (m) return { type: 'iframe', url: `https://player.vimeo.com/video/${m[1]}` };
+
+        // Selain itu dianggap direct link (.mp4, .webm, dll) → pakai tag <video>
+        return { type: 'video', url: src };
+      }
+
+      const playerInfo = detectPlayer(video.src);
+
+      let playerBlock;
+      if (playerInfo.type === 'iframe') {
+        playerBlock = `<iframe src="${playerInfo.url}" width="100%" height="500" allowfullscreen allowtransparency="true" allow="autoplay; fullscreen; picture-in-picture" scrolling="no" frameborder="0" style="display:block;"></iframe>`;
+      } else if (playerInfo.type === 'video') {
+        playerBlock = `<video controls autoplay preload="auto" poster="${video.poster !== '#' ? video.poster : ''}">
+             <source src="${playerInfo.url}">
+             Browser kamu tidak mendukung tag video HTML5.
+           </video>`;
+      } else {
+        playerBlock = `<div class="sv-player-placeholder">
+             <i class="fas fa-film"></i>
+             <p>URL video belum diisi — update <code>src</code> di data video.</p>
+           </div>`;
+      }
+
+      const posterUrl = (p) => p && p !== '#' ? p : 'https://via.placeholder.com/320x180/0D1117/4A9EFF?text=urstreamm';
+
+      main.innerHTML = `
+        <!-- BREADCRUMB -->
+        <div class="sv-breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Playlist</span>
+          <i class="fas fa-chevron-right"></i>
+          <span>#${String(idx + 1).padStart(2,'0')}</span>
+        </div>
+
+        <!-- PLAYER -->
+        <div class="sv-player-wrap">${playerBlock}</div>
+
+        <!-- INFO VIDEO -->
+        <div class="sv-video-info">
+          <div class="sv-video-number">#${String(idx + 1).padStart(2,'0')} / ${String(videos.length).padStart(2,'0')}</div>
+          <h1 class="sv-video-title">${video.title !== '#' ? video.title : 'Video ' + video.id}</h1>
+          <div class="sv-video-meta">
+            <span class="sv-card-tag ${video.tagClass}">${video.tag}</span>
+            <span class="sv-meta-item"><i class="fas fa-eye"></i> ${video.views} penonton</span>
+            <span class="sv-meta-item"><i class="fas fa-clock"></i> ${video.duration}</span>
+          </div>
+        </div>
+
+        <!-- NAVIGASI PREV / NEXT -->
+        <div class="sv-nav-videos">
+          <a class="sv-nav-card${!prev ? ' disabled' : ''}" href="${prev ? 'video.html?id=' + prev.id : '#'}">
+            <i class="fas fa-chevron-left sv-nav-arrow"></i>
+            <img class="sv-nav-thumb" src="${prev ? posterUrl(prev.poster) : ''}" alt="${prev ? prev.title : ''}" onerror="this.src='https://via.placeholder.com/160x90/0D1117/4A9EFF?text=prev'">
+            <div class="sv-nav-text">
+              <div class="sv-nav-label">Sebelumnya</div>
+              <div class="sv-nav-title">${prev ? (prev.title !== '#' ? prev.title : 'Video ' + prev.id) : '—'}</div>
+            </div>
+          </a>
+          <a class="sv-nav-card${!next ? ' disabled' : ''}" href="${next ? 'video.html?id=' + next.id : '#'}" style="flex-direction:row-reverse;text-align:right;">
+            <i class="fas fa-chevron-right sv-nav-arrow"></i>
+            <img class="sv-nav-thumb" src="${next ? posterUrl(next.poster) : ''}" alt="${next ? next.title : ''}" onerror="this.src='https://via.placeholder.com/160x90/0D1117/4A9EFF?text=next'">
+            <div class="sv-nav-text">
+              <div class="sv-nav-label">Selanjutnya</div>
+              <div class="sv-nav-title">${next ? (next.title !== '#' ? next.title : 'Video ' + next.id) : '—'}</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- PLAYLIST LENGKAP -->
+        <div class="sv-playlist-section">
+          <div class="sv-playlist-title">
+            <span class="line"></span>
+            <i class="fas fa-list" style="color:var(--accent-blue);font-size:18px;"></i>
+            Semua Video
+          </div>
+          <div class="sv-playlist-grid" id="sv-playlist-grid"></div>
+        </div>
+      `;
+
+      // Render playlist grid
+      const plGrid = document.getElementById('sv-playlist-grid');
+      videos.forEach((v, i) => {
+        const isActive = v.id === video.id;
+        const a = document.createElement('a');
+        a.className = 'sv-pl-card' + (isActive ? ' active' : '');
+        a.href = 'video.html?id=' + v.id;
+        a.innerHTML = `
+          <div class="sv-pl-thumb">
+            <img src="${posterUrl(v.poster)}" alt="${v.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/320x180/0D1117/4A9EFF?text=urstreamm'">
+            <span class="sv-pl-dur">${v.duration}</span>
+            ${isActive ? '<div class="sv-pl-now"><i class="fas fa-volume-up"></i></div>' : ''}
+          </div>
+          <div class="sv-pl-info">
+            <div class="sv-pl-num">#${String(i+1).padStart(2,'0')}</div>
+            <div class="sv-pl-name">${v.title !== '#' ? v.title : 'Video ' + v.id}</div>
+          </div>
+        `;
+        plGrid.appendChild(a);
+      });
+
+      // Scroll ke playlist card aktif
+      setTimeout(() => {
+        const active = plGrid.querySelector('.active');
+        if (active) active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }, 200);
+    }
+  </script>
+
+</body>
+</html>

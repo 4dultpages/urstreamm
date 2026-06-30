@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+
+<head>
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  <title>Urstreamm</title>
+  <link rel='icon' type='image/png' href='https://i.postimg.cc/SRRPq0z5/b4ff6c9108697381d9c30467292491ec-removebg-preview.png'/>
+  <link rel='shortcut icon' href='https://i.postimg.cc/SRRPq0z5/b4ff6c9108697381d9c30467292491ec-removebg-preview.png'/>
+  <link href='https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap' rel='stylesheet'/>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css' rel='stylesheet'/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{--bg-primary:#0D1117;--bg-secondary:#161B22;--bg-card:#1C2128;--accent-blue:#4A9EFF;--text-primary:#E6EDF3;--text-secondary:#8B949E;--text-muted:#484F58;--border-color:#30363D;--gradient-1:linear-gradient(135deg,#4A9EFF 0%,#7B5EA7 100%);--radius-md:12px;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1);}
+    body{font-family:'Inter',sans-serif;background-color:var(--bg-primary);color:var(--text-primary);min-height:100vh;line-height:1.6;}
+    ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg-secondary);}::-webkit-scrollbar-thumb{background:var(--accent-blue);border-radius:3px;}
+    .sv-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,17,23,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-color);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+    .sv-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .sv-logo-icon{width:36px;height:36px;background:var(--gradient-1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;}
+    .sv-logo-text{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:2px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .sv-nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
+    .sv-nav-links a{color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:500;transition:var(--transition);}
+    .sv-nav-links a:hover{color:var(--accent-blue);}
+    .sv-nav-search{display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:24px;padding:8px 16px;}
+    .sv-nav-search:focus-within{border-color:var(--accent-blue);}
+    .sv-nav-search input{background:none;border:none;outline:none;color:var(--text-primary);font-size:13px;width:160px;font-family:'Inter',sans-serif;}
+    .sv-nav-search input::placeholder{color:var(--text-muted);}
+    .sv-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+    .sv-hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);border-radius:2px;}
+    .sv-mobile-menu{display:none;flex-direction:column;background:var(--bg-secondary);border-bottom:1px solid var(--border-color);position:fixed;top:64px;left:0;right:0;z-index:999;}
+    .sv-mobile-menu.open{display:flex;}
+    .sv-mobile-menu a{padding:14px 24px;color:var(--text-secondary);text-decoration:none;font-size:14px;border-bottom:1px solid var(--border-color);}
+    .sv-mobile-menu a:hover{color:var(--accent-blue);}
+    .sv-hero{margin-top:64px;padding:60px 24px 40px;text-align:center;}
+    .sv-hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.3);color:var(--accent-blue);font-size:11px;font-weight:600;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:20px;font-family:'JetBrains Mono',monospace;}
+    .sv-hero h1{font-family:'Bebas Neue',cursive;font-size:clamp(42px,8vw,80px);letter-spacing:3px;line-height:1;margin-bottom:16px;}
+    .sv-hero h1 .highlight{background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .sv-hero p{color:var(--text-secondary);font-size:16px;max-width:500px;margin:0 auto 32px;font-weight:300;}
+    .sv-hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;}
+    .sv-stat{text-align:center;}
+    .sv-stat-number{font-family:'Bebas Neue',cursive;font-size:32px;color:var(--accent-blue);}
+    .sv-stat-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;}
+    .sv-section{padding:0 24px 40px;max-width:1400px;margin:0 auto;}
+    .sv-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
+    .sv-section-title{display:flex;align-items:center;gap:12px;}
+    .sv-section-title h2{font-family:'Bebas Neue',cursive;font-size:28px;letter-spacing:2px;}
+    .sv-section-title .line{width:4px;height:28px;background:var(--gradient-1);border-radius:2px;}
+    .sv-page-info{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);}
+    .sv-page-info span{color:var(--accent-blue);}
+    .sv-video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+    .sv-video-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-md);overflow:hidden;cursor:pointer;transition:var(--transition);}
+    .sv-video-card:hover{border-color:var(--accent-blue);box-shadow:0 8px 40px rgba(74,158,255,0.25);transform:translateY(-4px);}
+    .sv-thumbnail-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--bg-secondary);}
+    .sv-thumbnail-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
+    .sv-video-card:hover .sv-thumbnail-wrap img{transform:scale(1.06);}
+    .sv-thumbnail-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,transparent 50%);display:flex;align-items:center;justify-content:center;opacity:0;transition:var(--transition);}
+    .sv-video-card:hover .sv-thumbnail-overlay{opacity:1;}
+    .sv-play-btn{width:56px;height:56px;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.8);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;backdrop-filter:blur(8px);}
+    .sv-duration-badge{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.85);color:#fff;font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 7px;border-radius:4px;}
+    .sv-quality-badge{position:absolute;top:8px;left:8px;background:#FFD700;color:#000;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace;}
+    .sv-card-meta{padding:14px 16px 16px;}
+    .sv-card-number{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent-blue);letter-spacing:1px;margin-bottom:6px;}
+    .sv-card-title{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .sv-card-info{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .sv-card-tag{font-size:10px;font-weight:500;padding:3px 8px;border-radius:4px;}
+    .sv-tag-doc{background:rgba(74,158,255,0.15);color:var(--accent-blue);}
+    .sv-tag-science{background:rgba(236,72,153,0.15);color:#ec4899;}
+    .sv-tag-tech{background:rgba(20,184,166,0.15);color:#14b8a6;}
+    .sv-tag-culture{background:rgba(239,68,68,0.15);color:#ef4444;}
+    .sv-card-views{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:4px;}
+    .sv-video-grid .sv-video-card:first-child{grid-column:span 2;}
+    .sv-video-grid .sv-video-card:first-child .sv-thumbnail-wrap{aspect-ratio:21/9;}
+    .sv-video-grid .sv-video-card:first-child .sv-card-title{font-size:18px;}
+
+    /* PAGINATION */
+    .sv-pagination{display:flex;align-items:center;justify-content:center;gap:8px;padding:32px 24px 48px;flex-wrap:wrap;}
+    .sv-page-btn{display:flex;align-items:center;justify-content:center;min-width:40px;height:40px;padding:0 10px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-card);color:var(--text-secondary);font-size:14px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:'JetBrains Mono',monospace;text-decoration:none;gap:6px;}
+    .sv-page-btn:hover{border-color:var(--accent-blue);color:var(--accent-blue);}
+    .sv-page-btn.active{background:var(--gradient-1);border-color:transparent;color:#fff;}
+    .sv-page-btn.disabled{opacity:0.3;pointer-events:none;}
+
+    .sv-about{background:var(--bg-secondary);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);padding:50px 24px;margin-bottom:60px;}
+    .sv-about-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;}
+    .sv-about-card{display:flex;gap:16px;align-items:flex-start;}
+    .sv-about-icon{width:44px;height:44px;background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--accent-blue);font-size:18px;flex-shrink:0;}
+    .sv-about-text h4{font-size:14px;font-weight:600;margin-bottom:6px;}
+    .sv-about-text p{font-size:13px;color:var(--text-muted);line-height:1.6;}
+    .sv-footer{background:var(--bg-secondary);border-top:1px solid var(--border-color);padding:40px 24px 24px;text-align:center;}
+    .sv-footer-logo{font-family:'Bebas Neue',cursive;font-size:36px;letter-spacing:3px;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;}
+    .sv-footer p{color:var(--text-muted);font-size:13px;margin-bottom:20px;}
+    .sv-footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:24px;}
+    .sv-footer-links a{color:var(--text-secondary);text-decoration:none;font-size:12px;transition:var(--transition);}
+    .sv-footer-links a:hover{color:var(--accent-blue);}
+    .sv-footer-copy{font-size:12px;color:var(--text-muted);padding-top:20px;border-top:1px solid var(--border-color);}
+    @media(max-width:768px){
+      .sv-nav-links,.sv-nav-search{display:none;}
+      .sv-hamburger{display:flex;}
+      .sv-video-grid{grid-template-columns:1fr;gap:14px;}
+      .sv-video-grid .sv-video-card:first-child{grid-column:span 1;}
+      .sv-video-grid .sv-video-card:first-child .sv-thumbnail-wrap{aspect-ratio:16/9;}
+      .sv-about-inner{grid-template-columns:1fr;gap:20px;}
+    }
+    #sv-social-bar{position:fixed;bottom:0;left:0;right:0;z-index:9000;}
+  </style>
+</head>
+<body>
+  <div id='sv-social-bar'>
+    
+  </div>
+  <header class='sv-header'>
+    <a class='sv-logo' href='#'>
+     <img src='https://i.postimg.cc/SRRPq0z5/b4ff6c9108697381d9c30467292491ec-removebg-preview.png' alt='Logo' style='height:80px; width:auto;'/>
+      <span class='sv-logo-text'>urstreamm</span>
+    </a>
+    <ul class='sv-nav-links'>
+      <li> '>Home</a></li>
+      <li> '>Playlist</a></li>
+      <li> '>Trending</a></li>
+      <li> '>About</a></li>
+    </ul>
+    <div class='sv-nav-search'>
+      <i class='fas fa-search'></i>
+      <input placeholder='Cari video...' type='text'/>
+    </div>
+    <div class='sv-hamburger' id='sv-hamburger'><span></span><span></span><span></span></div>
+  </header>
+  <div class='sv-mobile-menu' id='sv-mobile-menu'>
+    <a href='#'>Home</a><a href='#'>Playlist</a><a href='#'>Trending</a><a href='#'>About</a>
+  </div>
+  <section class='sv-hero'>
+    <div class='sv-hero-badge'><i class='fas fa-circle'></i> Koleksi Video Terbaru</div>
+    <h1>Explore <span class='highlight'>Video</span> Terbaru</h1>
+    <p>Klik video untuk langsung memutar di browser.</p>
+    <div class='sv-hero-stats'>
+      <div class='sv-stat'><div class='sv-stat-number'>40</div><div class='sv-stat-label'>Video</div></div>
+      <div class='sv-stat'><div class='sv-stat-number'>4K+</div><div class='sv-stat-label'>Views</div></div>
+      <div class='sv-stat'><div class='sv-stat-number'>100%</div><div class='sv-stat-label'>Free</div></div>
+    </div>
+  </section>
+  <section class='sv-section'>
+    <div class='sv-section-header'>
+      <div class='sv-section-title'>
+        <span class='line'></span>
+        <h2><i class='fas fa-list' style='color:var(--accent-blue);margin-right:8px;'></i>Playlist</h2>
+      </div>
+      <div class='sv-page-info'>Halaman <span id='info-cur'>1</span> dari <span id='info-total'>5</span></div>
+    </div>
+    <div class='sv-video-grid' id='sv-video-grid'></div>
+  </section>
+  <nav class='sv-pagination' id='sv-pagination'></nav>
+  <section class='sv-about'>
+    <div class='sv-about-inner'>
+      <div class='sv-about-card'>
+        <div class='sv-about-icon'><i class='fas fa-globe'></i></div>
+        <div class='sv-about-text'><h4>Cepat</h4><p>Video dimuat dengan cepat tanpa buffering.</p></div>
+      </div>
+      <div class='sv-about-card'>
+        <div class='sv-about-icon'><i class='fas fa-bolt'></i></div>
+        <div class='sv-about-text'><h4>Simple &amp; Fast</h4><p>Klik → putar. Tanpa buffering, tanpa loading player.</p></div>
+      </div>
+      <div class='sv-about-card'>
+        <div class='sv-about-icon'><i class='fas fa-shield-alt'></i></div>
+        <div class='sv-about-text'><h4>Aman</h4><p>Video diproses dengan aman tanpa risiko malware.</p></div>
+      </div>
+    </div>
+  </section>
+  <footer class='sv-footer'>
+    <div class='sv-footer-logo'>urstreamm</div>
+    <p>Video playlist curated from multiple sources. Built for everyone.</p>
+    <div class='sv-footer-links'><a href='#'>Privacy</a><a href='#'>Terms</a><a href='#'>Contact</a><a href='#'>About</a></div>
+    <div class='sv-footer-copy'>&copy; 2026 urstreamm. All rights reserved.</div>
+  </footer>
+  <script>
+    const videos = [
+      {id:1,  title:"Esdeh",src:"https://cdn.slicedrive.com/YNsLtbzp1.mp4",poster:"logo1.png",duration:"09:40",views:"2.4K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:2,  title:"Omeq Solo",src:"https://cdn.slicedrive.com/jah8nSrY1.mp4",poster:"logo2.png",duration:"09:11",views:"1.8K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:3,  title:"After LDR",src:"https://cdn.slicedrive.com/s9cS88il1.mp4",poster:"logo3.png",duration:"07:09",views:"3.1K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:4,  title:"Pulang Sekolah",src:"https://cdn.slicedrive.com/fwjlb6PI1.mp4",poster:"logo4.png",duration:"06:56",views:"1.5K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:5,  title:"StayCation",src:"https://cdn.slicedrive.com/9APmXFuy1.mp4",poster:"logo5.png",duration:"05:52",views:"2.9K",tag:"Tech",      tagClass:"sv-tag-tech"},
+      {id:6,  title:"Pulang Kondangan",src:"https://cdn.slicedrive.com/I1LAUxvy1.mp4",poster:"logo6.png",duration:"06:12",views:"1.2K",tag:"Mainstream",tagClass:"sv-tag-culture"},
+      {id:7,  title:"Lagi Ange",src:"https://cdn.slicedrive.com/GLadnnGJ1.mp4",poster:"logo7.png",duration:"03:38",views:"4.0K",tag:"Mainstream",tagClass:"sv-tag-science"},
+      {id:8,  title:"Ange Banget",src:"https://cdn.slicedrive.com/e5QN4hGP1.mp4",poster:"logo8.png",duration:"07:50",views:"900", tag:"Mainstream",tagClass:"sv-tag-doc"},
+      {id:9,  title:"Pink Bangett",src:"https://cdn.slicedrive.com/3DhTnLGn1.mp4",poster:"logo9.png",duration:"02:25",views:"1.1K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:10, title:"BlowJOB",src:"https://cdn.slicedrive.com/GCmm1PSp1.mp4",poster:"logo10.png",duration:"06:22",views:"2.2K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:11, title:"Abis Kerja Kelompok",src:"https://sendvid.com/in6jj4ji",poster:"logo11.png",duration:"10:34",views:"3.5K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:12, title:"Binal BGT ",src:"https://cdn.slicedrive.com/1Q0STnuX1.mp4",poster:"logo12.png",duration:"02:14",views:"1.9K",tag:"Tech",      tagClass:"sv-tag-tech"},
+      {id:13, title:"Adik adalah maut",src:"https://cdn.slicedrive.com/NdVWKAWP1.mp4",poster:"logo13.png",duration:"07:53",views:"2.7K",tag:"Mainstream",tagClass:"sv-tag-culture"},
+      {id:14, title:"Jatah cewek",src:"https://cdn.slicedrive.com/1KvLXlMO1.mp4",poster:"logo14.png",duration:"09:58",views:"1.4K",tag:"Mainstream",tagClass:"sv-tag-science"},
+      {id:15, title:"Masih Sempitt",src:"https://cdn.slicedrive.com/9NpmmxVr1.mp4",poster:"logo15.png",duration:"01:27",views:"3.8K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:16, title:"Sama Tetangga Kost",src:"https://cdn.slicedrive.com/zDZWPmWL1.mp4",poster:"logo16.png",duration:"04:15",views:"800", tag:"Mainstream",tagClass:"sv-tag-doc"},
+      {id:17, title:"Tocil",src:"https://cdn.slicedrive.com/vzl4dS1q1.mp4",poster:"logo17.png",duration:"06:01",views:"2.0K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:18, title:"Mentok Bgt",src:"https://cdn.slicedrive.com/vRU3S6th1.mp4",poster:"logo18.png",duration:"05:09",views:"1.6K",tag:"Tech",      tagClass:"sv-tag-tech"},
+      {id:19, title:"Ceweknya KeEnakan",src:"https://cdn.slicedrive.com/xQ0Ru2yB1.mp4",poster:"logo19.png",duration:"09:92",views:"4.2K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:20, title:"sepong Pacar",src:"https://cdn.slicedrive.com/7XwAGwKd1.mp4",poster:"logo20.png",duration:"07:18",views:"2.3K",tag:"Mainstream",tagClass:"sv-tag-culture"},
+      {id:21, title:"HYper bgt Ceweknya",src:"https://cdn.slicedrive.com/ppUBApc61.mp4",poster:"logo21.png",duration:"01:33",views:"1.0K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:22, title:"Tocil Omeq",src:"https://cdn.slicedrive.com/umhIR3VQ1.mp4",poster:"logo22.png",duration:"01:32",views:"3.3K",tag:"Mainstream",tagClass:"sv-tag-science"},
+      {id:23, title:"Sama Mantan",src:"https://cdn.slicedrive.com/ddw39znd1.mp4",poster:"logo23.png",duration:"01:00",views:"2.8K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:24, title:"Random",src:"https://cdn.aceimg.com/Ds97fsZIV.mp4",poster:"logo24.png",duration:"06:33",views:"1.7K",tag:"Mainstream",tagClass:"sv-tag-doc"},
+      {id:25, title:"Mirror Mantap",src:"https://cdn.aceimg.com/Hw85P58KS.mp4",poster:"logo25.png",duration:"05:03",views:"2.1K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:26, title:"Tobrut Check in",src:"https://cdn.aceimg.com/F7NfG1UN8.mp4",poster:"logo26.png",duration:"06:12",views:"1.3K",tag:"Tech",      tagClass:"sv-tag-tech"},
+      {id:27, title:"Ngewe di Kost",src:"https://cdn.aceimg.com/mNMnzy5RK.mp4",poster:"logo27.png",duration:"02:55",views:"3.0K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:28, title:"Tobrut binal banget",src:"https://cdn.aceimg.com/LenQt6YYs.mp4",poster:"logo28.png",duration:"04:31",views:"2.5K",tag:"Mainstream",tagClass:"sv-tag-culture"},
+      {id:29, title:"Jilbab Omeq",src:"https://cdn.aceimg.com/M3fnjmYOx.mp4",poster:"logo29.png",duration:"02:00",views:"4.5K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:30, title:"Ketahuan Omeq",src:"https://cdn.aceimg.com/IA9h0ozP8.mp4",poster:"logo30.png",duration:"06:59",views:"700", tag:"Mainstream",tagClass:"sv-tag-science"},
+      {id:31, title:"Pulang Sekolah check in",src:"https://cdn.aceimg.com/aXKTl282S.mp4",poster:"logo31.png",duration:"05:43",views:"2.6K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:32, title:"Cantik bgt ni cewek",src:"https://cdn.aceimg.com/YbeGH3BaU.mp4",poster:"logo32.png",duration:"01:00",views:"1.5K",tag:"Mainstream",tagClass:"sv-tag-doc"},
+      {id:33, title:"Doggy cum di dalem",src:"https://cdn.aceimg.com/znvphiMy2.mp4",poster:"logo33.png",duration:"01:54",views:"2.9K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:34, title:"Tobrut Hyper",src:"https://cdn.aceimg.com/Lnb2GxdOp.mp4",poster:"logo34.png",duration:"05:58",views:"1.8K",tag:"Tech",      tagClass:"sv-tag-tech"},
+      {id:35, title:"Layanin Pacar",src:"https://cdn.aceimg.com/Tg7m6Q1Tb.mp4",poster:"logo35.png",duration:"05:42",views:"3.7K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:36, title:"CrotDalem",src:"https://cdn.aceimg.com/bbIMHh2L9.mp4",poster:"logo36.png",duration:"09:29",views:"1.1K",tag:"Mainstream",tagClass:"sv-tag-culture"},
+      {id:37, title:"Daddy Ash",src:"https://cdn.aceimg.com/e3zqRBB9c.mp4",poster:"logo37.png",duration:"09:31",views:"4.1K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:38, title:"Becek",src:"https://cdn.aceimg.com/c8eWxKmm0.mp4",poster:"logo38.png",duration:"07:56",views:"2.4K",tag:"Mainstream",tagClass:"sv-tag-science"},
+      {id:39, title:"Adik Tiri",src:"https://cdn.aceimg.com/SnojqytuK.mp4",poster:"logo39.png",duration:"08:50",views:"3.2K",tag:"Adult",     tagClass:"sv-tag-tech"},
+      {id:40, title:"Mentok Bangett",src:"https://cdn.aceimg.com/6xt5bzVua.mp4",poster:"logo40.png",duration:"02:45",views:"950", tag:"Mainstream",tagClass:"sv-tag-doc"},
+    ];
+
+    const PER_PAGE   = 8;
+    const TOTAL_PAGE = Math.ceil(videos.length / PER_PAGE);
+
+    function getPage() {
+      const p = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
+      return Math.min(Math.max(p, 1), TOTAL_PAGE);
+    }
+
+    const grid    = document.getElementById('sv-video-grid');
+    const paginav = document.getElementById('sv-pagination');
+    const infoCur = document.getElementById('info-cur');
+
+    function renderCards(page) {
+      const start = (page - 1) * PER_PAGE;
+      const slice = videos.slice(start, start + PER_PAGE);
+      grid.innerHTML = '';
+      slice.forEach((v, i) => {
+        const globalIdx = start + i;
+        const card = document.createElement('div');
+        card.className = 'sv-video-card';
+        card.innerHTML = `
+          <div class="sv-thumbnail-wrap">
+            <img src="${v.poster !== '#' ? v.poster : ''}" alt="${v.title !== '#' ? v.title : 'Video '+v.id}" loading="lazy"
+                 onerror="this.src='https://via.placeholder.com/640x360/0D1117/4A9EFF?text=urstreamm'">
+            <div class="sv-thumbnail-overlay"><div class="sv-play-btn"><i class="fas fa-play"></i></div></div>
+            <span class="sv-duration-badge">${v.duration}</span>
+            <span class="sv-quality-badge">HD</span>
+          </div>
+          <div class="sv-card-meta">
+            <div class="sv-card-number">#${String(globalIdx+1).padStart(2,'0')}</div>
+            <div class="sv-card-title">${v.title !== '#' ? v.title : 'Video '+v.id}</div>
+            <div class="sv-card-info">
+              <span class="sv-card-tag ${v.tagClass}">${v.tag}</span>
+              <span class="sv-card-views"><i class="fas fa-eye"></i> ${v.views}</span>
+            </div>
+          </div>`;
+        card.addEventListener('click', () => { window.location.href = 'video.html?id=' + v.id; });
+        grid.appendChild(card);
+      });
+      infoCur.textContent = page;
+    }
+
+    function renderPagination(page) {
+      paginav.innerHTML = '';
+      // PREV
+      const prev = document.createElement('a');
+      prev.className = 'sv-page-btn' + (page===1?' disabled':'');
+      prev.href = page>1 ? '?page='+(page-1) : '#';
+      prev.innerHTML = '<i class="fas fa-chevron-left"></i> Prev';
+      prev.addEventListener('click', e => { e.preventDefault(); if(page>1) goPage(page-1); });
+      paginav.appendChild(prev);
+      // NOMOR
+      for(let p=1;p<=TOTAL_PAGE;p++){
+        const btn = document.createElement('a');
+        btn.className = 'sv-page-btn'+(p===page?' active':'');
+        btn.textContent = p;
+        btn.href = '?page='+p;
+        btn.addEventListener('click', e => { e.preventDefault(); goPage(p); });
+        paginav.appendChild(btn);
+      }
+      // NEXT
+      const next = document.createElement('a');
+      next.className = 'sv-page-btn'+(page===TOTAL_PAGE?' disabled':'');
+      next.href = page<TOTAL_PAGE ? '?page='+(page+1) : '#';
+      next.innerHTML = 'Next <i class="fas fa-chevron-right"></i>';
+      next.addEventListener('click', e => { e.preventDefault(); if(page<TOTAL_PAGE) goPage(page+1); });
+      paginav.appendChild(next);
+    }
+
+    function goPage(page) {
+      history.pushState({page}, '', '?page='+page);
+      renderCards(page);
+      renderPagination(page);
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    window.addEventListener('popstate', e => {
+      const p = (e.state&&e.state.page) || getPage();
+      renderCards(p); renderPagination(p);
+    });
+
+    document.getElementById('sv-hamburger').addEventListener('click', () => {
+      document.getElementById('sv-mobile-menu').classList.toggle('open');
+    });
+
+    const init = getPage();
+    renderCards(init);
+    renderPagination(init);
+  </script>
+</body>
+</html>
